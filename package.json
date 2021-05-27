@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "expo": "~41.0.1",
+    "expo-camera": "~11.0.2",
     "expo-status-bar": "~1.0.4",
     "face-api.js": "^0.22.2",
     "react": "16.13.1",
