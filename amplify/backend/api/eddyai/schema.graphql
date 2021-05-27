@@ -1,0 +1,6 @@
+type Room @model {
+  id: ID!
+  code: String!
+  name: String!
+  description: String
+}
