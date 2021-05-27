@@ -8,6 +8,8 @@ export const createRoom = /* GraphQL */ `
   ) {
     createRoom(input: $input, condition: $condition) {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
@@ -23,6 +25,8 @@ export const updateRoom = /* GraphQL */ `
   ) {
     updateRoom(input: $input, condition: $condition) {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
@@ -38,6 +42,8 @@ export const deleteRoom = /* GraphQL */ `
   ) {
     deleteRoom(input: $input, condition: $condition) {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description

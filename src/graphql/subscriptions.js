@@ -5,6 +5,8 @@ export const onCreateRoom = /* GraphQL */ `
   subscription OnCreateRoom {
     onCreateRoom {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
@@ -17,6 +19,8 @@ export const onUpdateRoom = /* GraphQL */ `
   subscription OnUpdateRoom {
     onUpdateRoom {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
@@ -29,6 +33,8 @@ export const onDeleteRoom = /* GraphQL */ `
   subscription OnDeleteRoom {
     onDeleteRoom {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
