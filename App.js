@@ -2,71 +2,51 @@ import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as FaceDetector from "expo-face-detector";
 import { Camera } from "expo-camera";
+import { MainStack } from "./src/stack-navigators/MainStack";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from "./src/context-provider/AuthContext";
+import { SplashScreen } from "./src/screens/SplashScreen";
+import { LoginScreen } from "./src/screens/LoginScreen";
+import { sleep } from "./src/utils/sleep";
+
+
 
 export default function App() {
-  const [status, setStatus] = useState("");
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [face, setFaces] = useState([]);
 
-  const videoRef = useRef();
-  const canvasRef = useRef();
+  const isLoggedIn = useState(false)
+  const [isSplashLoading, setSplashLoading] = useState(true)
+  
 
   useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
+    
 
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+  }, [])
+  
+  const loadSplash = () => {
+    return <SplashScreen />
   }
 
-  const faceDetected = async ({ faces }) => {
-    setFaces({ faces });
-    const options = { mode: FaceDetector.Constants.Mode.fast };
+  const renderScreens = () => {
+    
+  
 
-    if (faces.length > 0) {
-      console.log(faces ? Math.round(faces[0].smilingProbability) : []);
-    }
-  };
+    sleep(2000).then(() => {
+      setSplashLoading(false)
+    })
+
+    return isSplashLoading ? <SplashScreen/> : <MainStack/>
+
+  }
+
 
   return (
-    <View style={styles.container}>
-      <Camera
-        style={styles.camera}
-        onFacesDetected={faceDetected}
-        faceDetectorSettings={{
-          mode: FaceDetector.Constants.Mode.fast,
-          detectLandmarks: FaceDetector.Constants.Landmarks.all,
-          runClassifications: FaceDetector.Constants.Classifications.all,
-          minDetectionInterval: 1000,
-          tracking: true,
-        }}
-        type={type}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}
-          >
-            <Text style={styles.text}> Flip </Text>
-            <Text style={styles.text}> {status} </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
-    </View>
+    <NavigationContainer>
+      <AuthContext.Provider>
+        {renderScreens()}
+      </AuthContext.Provider>
+    </NavigationContainer>
   );
+
 }
 
 const styles = StyleSheet.create({
