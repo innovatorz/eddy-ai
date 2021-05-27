@@ -46,7 +46,11 @@ export default function App() {
   const faceDetected = async ({ faces }) => {
     setFaces({ faces })
     const options = { mode: FaceDetector.Constants.Mode.fast };
-    console.log(faces ? faces[0].smilingProbability :[] )
+
+    if(faces.length > 0){
+      console.log(faces ? faces[0].smilingProbability :[])
+    }
+
   }
 
   return (
@@ -65,7 +69,7 @@ export default function App() {
           mode: FaceDetector.Constants.Mode.fast,
           detectLandmarks: FaceDetector.Constants.Landmarks.all,
           runClassifications: FaceDetector.Constants.Classifications.all,
-          minDetectionInterval: 5000,
+          minDetectionInterval: 1000,
           tracking: true
         }}
         type={'front'}
