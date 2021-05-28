@@ -1,0 +1,8 @@
+type Room @model {
+  id: ID!
+  teacherOwnerId: String
+  teacherOwnerUsername: String
+  code: String!
+  name: String
+  description: String
+}

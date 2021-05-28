@@ -10,11 +10,6 @@
       "StackName": "amplify-eddyai-dev-00357",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:502723196350:stack/amplify-eddyai-dev-00357/276208d0-bf05-11eb-b0c7-02ab63576a78",
       "AmplifyAppId": "d3ez0960cxy2yq"
-    },
-    "categories": {
-      "auth": {
-        "eddyai408a8636": {}
-      }
     }
   }
 }

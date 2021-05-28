@@ -5,6 +5,8 @@ export const getRoom = /* GraphQL */ `
   query GetRoom($id: ID!) {
     getRoom(id: $id) {
       id
+      teacherOwnerId
+      teacherOwnerUsername
       code
       name
       description
@@ -22,6 +24,8 @@ export const listRooms = /* GraphQL */ `
     listRooms(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        teacherOwnerId
+        teacherOwnerUsername
         code
         name
         description
