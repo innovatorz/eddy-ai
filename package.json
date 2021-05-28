@@ -12,12 +12,14 @@
     "@react-native-community/netinfo": "^5.9.7",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "amazon-cognito-identity-js": "^5.0.2",
     "aws-amplify": "^4.0.3",
     "aws-amplify-react-native": "^5.0.1",
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "expo": "~41.0.1",
     "expo-camera": "~11.0.2",
+    "expo-chart-kit": "^1.2.4",
     "expo-face-detector": "~10.0.1",
     "expo-status-bar": "~1.0.4",
     "face-api.js": "^0.22.2",
@@ -29,6 +31,7 @@
     "react-native-dotenv": "^2.5.5",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-screens": "^2.15.2",
+    "react-native-svg": "^12.1.1",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

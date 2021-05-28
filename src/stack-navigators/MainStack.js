@@ -12,15 +12,18 @@ import { TeacherReportHistoryScreen } from "../screens/TeacherReportHistoryScree
 import { TeacherDashboardScreen } from "../screens/TeachersDashboardScreen";
 import { SplashScreen } from "../screens/SplashScreen";
 import { LandingScreen } from "../screens/LandingScreen";
+import { LoginScreen } from "../screens/LoginScreen";
+
 
 const Stack = createStackNavigator()
 
 
-export const MainStack = () => {
-    
+export const MainStack = ({ initialRouteName}) => {
+  
     return (
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator headerMode="screen" initialRouteName={initialRouteName}>
             
+        
             <Stack.Screen
                 name="Landing"
                 component={LandingScreen}
@@ -29,21 +32,25 @@ export const MainStack = () => {
                     headerShown:false
                 }} }
             />
+      
             <Stack.Screen
                 name="Access Code"
                 component={AccessCodeScreen}
-                
             />
+
             <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+            />
+
+               <Stack.Screen
                 name="Add Subject"
                 component={AddSubjectScreen}
-                
             />
-            
+          
             <Stack.Screen
                 name="Classroom"
                 component={ClassroomScreen}
-               
             />
 
             <Stack.Screen
@@ -64,7 +71,12 @@ export const MainStack = () => {
             <Stack.Screen
                name="Teacher Dashboard"
                component={TeacherDashboardScreen}
-            />
+            />           
+   
+
+
+          
+         
         </Stack.Navigator>
     )
 }
