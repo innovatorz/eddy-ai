@@ -8,41 +8,43 @@ import { AuthContext } from "./src/context-provider/AuthContext";
 import { SplashScreen } from "./src/screens/SplashScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { sleep } from "./src/utils/sleep";
+import { useFaceRecognition } from "./src/hooks/useFaceRecognition";
+import { lightTheme } from "./src/theme/light";
 
-// Start Backend integration using amplify
-import Amplify from "aws-amplify";
-import config from "./src/aws-exports";
-Amplify.configure({
-  ...config,
-  Analytics: {
-    disabled: true,
-  },
-});
-// End
+
 
 export default function App() {
-  const isLoggedIn = useState(false);
-  const [isSplashLoading, setSplashLoading] = useState(true);
 
-  useEffect(() => {}, []);
+  const isLoggedIn = useState(false)
+  const [isSplashLoading, setSplashLoading] = useState(true)
 
+  useEffect(() => {
+    
+  }, [])
+  
   const loadSplash = () => {
-    return <SplashScreen />;
-  };
+    return <SplashScreen />
+  }
 
   const renderScreens = () => {
+  
     sleep(2000).then(() => {
-      setSplashLoading(false);
-    });
+      setSplashLoading(false)
+    })
 
-    return isSplashLoading ? <SplashScreen /> : <MainStack />;
-  };
+    return isSplashLoading ? <SplashScreen /> : <MainStack initialScreen={isLoggedIn ? "Subject" : "Landing"}/>
+
+  }
+
 
   return (
-    <NavigationContainer>
-      <AuthContext.Provider>{renderScreens()}</AuthContext.Provider>
-    </NavigationContainer>
+      <NavigationContainer theme={lightTheme}>
+        <AuthContext.Provider>
+          {renderScreens()}
+        </AuthContext.Provider>
+      </NavigationContainer>
   );
+
 }
 
 const styles = StyleSheet.create({
