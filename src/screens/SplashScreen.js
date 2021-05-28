@@ -7,8 +7,8 @@ export const SplashScreen = ({ navigation }) => {
     return (
         <>
             <View style={{alignItems:'center',flex:1,justifyContent:'center'}}>
-                <Image source={require('../assets/eddy-logo.png')} />
-                </View>
+                <Image source={require('../assets/images/eddy-logo.png')} />
+            </View>
         </>
     )
 }

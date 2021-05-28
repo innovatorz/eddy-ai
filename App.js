@@ -18,6 +18,7 @@ import { useMemo } from "react";
 // Start Backend integration using amplify
 import Amplify from "aws-amplify";
 import config from "./src/aws-exports";
+import { getFonts } from "./src/typography";
 Amplify.configure({
   ...config,
   Analytics: {
@@ -34,6 +35,12 @@ export default function App() {
   useEffect(() => {
     sleep(2000).then(() => {
       setSplashLoading(false)
+    })
+
+
+    //load google fonts
+    getFonts().then(() => {
+      console.log('fonts loaded')
     })
   },[])
 
