@@ -13,14 +13,16 @@ import { TeacherDashboardScreen } from "../screens/TeachersDashboardScreen";
 import { SplashScreen } from "../screens/SplashScreen";
 import { LandingScreen } from "../screens/LandingScreen";
 
+
 const Stack = createStackNavigator()
 
 
-export const MainStack = ({ initialScreen }) => {
-    
+export const MainStack = ({ initialRouteName}) => {
+  
     return (
-        <Stack.Navigator initialRouteName={initialScreen}>
+        <Stack.Navigator headerMode="screen" initialRouteName={initialRouteName}>
             
+        
             <Stack.Screen
                 name="Landing"
                 component={LandingScreen}
@@ -29,15 +31,14 @@ export const MainStack = ({ initialScreen }) => {
                     headerShown:false
                 }} }
             />
-            <Stack.Screen
-                name="Access Code"
-                component={AccessCodeScreen}
-                
-            />
-            <Stack.Screen
+      
+                <Stack.Screen
+                    name="Access Code"
+                    component={AccessCodeScreen}
+                />
+               <Stack.Screen
                 name="Add Subject"
                 component={AddSubjectScreen}
-                
             />
           
             <Stack.Screen
@@ -63,7 +64,12 @@ export const MainStack = ({ initialScreen }) => {
             <Stack.Screen
                name="Teacher Dashboard"
                component={TeacherDashboardScreen}
-            />
+            />           
+   
+
+
+          
+         
         </Stack.Navigator>
     )
 }
