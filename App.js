@@ -14,11 +14,16 @@ import { LandingScreen } from "./src/screens/LandingScreen";
 import { SubjectScreen } from "./src/screens/SubjectScreen";
 import { useMemo } from "react";
 import { withAuthenticator, Authenticator } from 'aws-amplify-react-native'
+import * as Font from "expo-font";
+import AppLoading from 'expo-app-loading';
 
 // Start Backend integration using amplify
 import Amplify from "aws-amplify";
 import config from "./src/aws-exports";
-import { getFonts } from "./src/typography";
+import { FontDisplay } from "expo-font";
+import { AddSubjectModal } from "./src/components/AddSubjectModal";
+import { useModal } from "./src/hooks/useModals";
+
 Amplify.configure({
   ...config,
   Analytics: {
@@ -30,34 +35,49 @@ Amplify.configure({
 
 
 
-const App =() => {
+const App = () => {
 
   const [isLoggedIn, setLogin] = useState(false)
   const [isSplashLoading, setSplashLoading] = useState(true)
+  const [isFontLoaded, setFontLoaded] = useState(false)
 
+  const { modals} = useModal()
+
+  async function enableFontExpo () {
+      
+      await Font.loadAsync({
+       
+        SemiBold: require("./src/assets/fonts/Poppins-Regular.ttf")
+      })
+
+      setFontLoaded(true)
+    }
+
+  
   useEffect(() => {
+
     sleep(2000).then(() => {
       setSplashLoading(false)
     })
-
-    //load google fonts
-    getFonts().then(() => {
-      console.log('fonts loaded')
-    })
-  },[])
+  
+  }, [])
+  
+  if (!isFontLoaded) {
+    return
+      <AppLoading
+        startAsync={enableFontExpo}
+        onFinish={() =>  setFontLoaded(true)}
+        onError={console.warn}/>
+    }
 
   return (
       <NavigationContainer theme={lightTheme}>
         <AuthContext.Provider>
         {isSplashLoading ?
           <SplashScreen/>  :
-          <MainStack initialRouteName={isLoggedIn ? "Subject" : "Landing"} />
-        
-         
-         
-        
-         
+          <MainStack initialRouteName={"Add Subject"} />
         }
+        <AddSubjectModal addSubjectModalRef={modals[0]}/>
         </AuthContext.Provider>
       </NavigationContainer>
   );

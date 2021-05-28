@@ -10,10 +10,10 @@ export const SubjectScreen = ({ navigation}) => {
             <Text>Enter Classroom</Text>
             </Button>
             
-             <Button onPress={() => {
+            <Button onPress={() => {
                 navigation.navigate('Teacher Dashboard')
             }}>
-            <Text>Access Dashboard - Teacher</Text>
+                <Text style={{fontFamily: "SemiBold" }}>Access Dashboard - Teacher</Text>
         </Button>
         </>
     )

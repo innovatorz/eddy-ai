@@ -18,6 +18,7 @@
     "axios": "^0.21.1",
     "canvas": "^2.8.0",
     "expo": "~41.0.1",
+    "expo-app-loading": "^1.0.3",
     "expo-camera": "~11.0.2",
     "expo-chart-kit": "^1.2.4",
     "expo-face-detector": "~10.0.1",
@@ -30,6 +31,7 @@
     "react-native-chart-kit": "^6.11.0",
     "react-native-dotenv": "^2.5.5",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-modalize": "^2.0.8",
     "react-native-screens": "^2.15.2",
     "react-native-svg": "^12.1.1",
     "react-native-web": "~0.13.12"
