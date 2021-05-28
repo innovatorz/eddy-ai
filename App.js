@@ -1,98 +1,74 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import * as canvas from 'canvas';
-import * as faceapi from 'face-api.js';
-import config from "./config"
-import axios from 'axios';
+import React, { useEffect, useRef, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as FaceDetector from "expo-face-detector";
+import { Camera } from "expo-camera";
+import { MainStack } from "./src/stack-navigators/MainStack";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from "./src/context-provider/AuthContext";
+import { SplashScreen } from "./src/screens/SplashScreen";
+import { LoginScreen } from "./src/screens/LoginScreen";
+import { sleep } from "./src/utils/sleep";
+
 
 
 export default function App() {
 
-  const videoHeight = 480
-  const videoWidth = 640
-  const [initializing, setInitializing] = useState(false)
-  const videoRef = useRef()
-  const canvasRef = useRef()
-  const { Canvas, Image, ImageData } = canvas
-  faceapi.env.monkeyPatch({ Canvas, Image, ImageData })
-  
-  
-  const { PUBLIC_URL } = process.env
-
+  const isLoggedIn = useState(false)
+  const [isSplashLoading, setSplashLoading] = useState(true)
   
 
   useEffect(() => {
-
-      const loadModels = async () => {
     
-        setInitializing(true);
-        
-        const net = new faceapi.SsdMobilenetv1()
-        // await net.loadFromUri('./public/models')
-
-        const MODEL_URL = './assets/models'
-      
-        Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL)])
-      // Promise.all([
-      //   faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      //   faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-      //   faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-      //   faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL)
-      // ]).then(startVideo)
-    }
-    
-    loadModels()
 
   }, [])
   
-
-  const startVideo = () => {
-    navigator.getUserMedia({
-      video: {}
-    },
-      (stream) => videoRef.current.srcObject = stream,
-      (err) => console.log(err))
-    
-    
+  const loadSplash = () => {
+    return <SplashScreen />
   }
 
-  const handleVideoOnPlay = () => {
-    setInterval(async() => {
-      
-      if (initializing) {
-        setInitializing(false)
-      }
+  const renderScreens = () => {
+    
+  
 
-      const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions).withFaceLandmarks().withFaceExpressions()
+    sleep(2000).then(() => {
+      setSplashLoading(false)
+    })
 
-      console.log(detections)
-    },100)
+    return isSplashLoading ? <SplashScreen/> : <MainStack/>
+
   }
 
 
-  // startVideo()
-
-
-  // startVideo()
   return (
-    <div className="App">
-      <span>{initializing ? 'Initializing' : 'Ready'}</span>
-      <div>
-        <video ref={videoRef} autoPlay muted height={videoHeight} width={videoWidth} onPlay={ handleVideoOnPlay}/>
-        <canvas ref={canvasRef} />
-        <h1>URI{config.PUBLIC_URL+'/models'}</h1>
-      </div>
-     
-   </div>
+    <NavigationContainer>
+      <AuthContext.Provider>
+        {renderScreens()}
+      </AuthContext.Provider>
+    </NavigationContainer>
   );
+
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  camera: {
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    margin: 20,
+  },
+  button: {
+    flex: 0.1,
+    alignSelf: "flex-end",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 18,
+    color: "white",
   },
 });
