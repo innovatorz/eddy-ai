@@ -1,8 +1,15 @@
 import { Text } from "native-base";
 import React, { useEffect } from "react";
+import { withAuthenticator,Authenticator } from 'aws-amplify-react-native'
 
 export const LoginScreen = () => {
     return (
-        <Text style={{fontSize:20}}>Login</Text>
+        <Authenticator/>
     )
 }
+
+// export const LoginScreen = () => (
+//     <Authenticator>
+        
+//     </Authenticator>
+// )

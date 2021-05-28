@@ -13,7 +13,7 @@ import { lightTheme } from "./src/theme/light";
 import { LandingScreen } from "./src/screens/LandingScreen";
 import { SubjectScreen } from "./src/screens/SubjectScreen";
 import { useMemo } from "react";
-
+import { withAuthenticator, Authenticator } from 'aws-amplify-react-native'
 
 // Start Backend integration using amplify
 import Amplify from "aws-amplify";
@@ -27,7 +27,10 @@ Amplify.configure({
 });
 // End
 
-export default function App() {
+
+
+
+const App =() => {
 
   const [isLoggedIn, setLogin] = useState(false)
   const [isSplashLoading, setSplashLoading] = useState(true)
@@ -36,7 +39,6 @@ export default function App() {
     sleep(2000).then(() => {
       setSplashLoading(false)
     })
-
 
     //load google fonts
     getFonts().then(() => {
@@ -50,12 +52,21 @@ export default function App() {
         {isSplashLoading ?
           <SplashScreen/>  :
           <MainStack initialRouteName={isLoggedIn ? "Subject" : "Landing"} />
+        
+         
+         
+        
+         
         }
         </AuthContext.Provider>
       </NavigationContainer>
   );
 
 }
+
+export default App
+
+
 
 const styles = StyleSheet.create({
   container: {
