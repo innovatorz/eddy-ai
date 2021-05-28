@@ -8,6 +8,8 @@ import { AuthContext } from "./src/context-provider/AuthContext";
 import { SplashScreen } from "./src/screens/SplashScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { sleep } from "./src/utils/sleep";
+import { useFaceRecognition } from "./src/hooks/useFaceRecognition";
+import { lightTheme } from "./src/theme/light";
 
 
 
@@ -15,11 +17,9 @@ export default function App() {
 
   const isLoggedIn = useState(false)
   const [isSplashLoading, setSplashLoading] = useState(true)
-  
 
   useEffect(() => {
     
-
   }, [])
   
   const loadSplash = () => {
@@ -27,20 +27,18 @@ export default function App() {
   }
 
   const renderScreens = () => {
-    
   
-
     sleep(2000).then(() => {
       setSplashLoading(false)
     })
 
-    return isSplashLoading ? <SplashScreen/> : <MainStack/>
+    return isSplashLoading ? <SplashScreen /> : <MainStack initialScreen={isLoggedIn ? "Subject" : "Landing"}/>
 
   }
 
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={lightTheme}>
       <AuthContext.Provider>
         {renderScreens()}
       </AuthContext.Provider>

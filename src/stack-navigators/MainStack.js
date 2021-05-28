@@ -16,10 +16,10 @@ import { LandingScreen } from "../screens/LandingScreen";
 const Stack = createStackNavigator()
 
 
-export const MainStack = () => {
+export const MainStack = ({ initialScreen }) => {
     
     return (
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName={initialScreen}>
             
             <Stack.Screen
                 name="Landing"
@@ -39,11 +39,10 @@ export const MainStack = () => {
                 component={AddSubjectScreen}
                 
             />
-            
+          
             <Stack.Screen
                 name="Classroom"
                 component={ClassroomScreen}
-               
             />
 
             <Stack.Screen
