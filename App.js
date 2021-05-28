@@ -38,11 +38,11 @@ export default function App() {
 
 
   return (
-    <NavigationContainer theme={lightTheme}>
-      <AuthContext.Provider>
-        {renderScreens()}
-      </AuthContext.Provider>
-    </NavigationContainer>
+      <NavigationContainer theme={lightTheme}>
+        <AuthContext.Provider>
+          {renderScreens()}
+        </AuthContext.Provider>
+      </NavigationContainer>
   );
 
 }
