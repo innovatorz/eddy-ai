@@ -1,5 +1,12 @@
 {
-  "auth": {},
+  "auth": {
+    "eddyaibc2524ff": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
   "api": {
     "eddyapi": {
       "service": "AppSync",

@@ -20,7 +20,7 @@ Amplify.configure({
 });
 // End
 
-export default function App() {
+export function App() {
   const isLoggedIn = useState(false);
   const [isSplashLoading, setSplashLoading] = useState(true);
 
@@ -44,6 +44,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
